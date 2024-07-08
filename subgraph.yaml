@@ -1,0 +1,32 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: TokenVesting
+    network: mainnet
+    source:
+      address: "0xa7BC89F9Bcd2E6565c250182767f20e2aC89bc7B"
+      abi: TokenVesting
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.2
+      language: wasm/assemblyscript
+      entities:
+        - AdminWithdrawal
+        - OwnershipTransferred
+        - VestingClaimed
+        - VestingStarted
+      abis:
+        - name: TokenVesting
+          file: ./abis/TokenVesting.json
+      eventHandlers:
+        - event: AdminWithdrawal(indexed address,uint256)
+          handler: handleAdminWithdrawal
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: VestingClaimed(indexed address,uint256)
+          handler: handleVestingClaimed
+        - event: VestingStarted(uint256)
+          handler: handleVestingStarted
+      file: ./src/mapping.ts
