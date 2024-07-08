@@ -1,6 +1,6 @@
 specVersion: 0.0.4
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: TokenVesting
@@ -17,8 +17,8 @@ dataSources:
         - User
       abis:
         - name: TokenVesting
-          file: ./abis/TokenVesting.json
+          file: TokenVesting/abis/TokenVesting.json
       callHandlers:
         - function: setVestingAmounts(uint256,address[],uint256[])
           handler: handleSetVestingAmounts
-      file: ./src/mapping.ts
+      file: TokenVesting/TokenVesting.wasm
